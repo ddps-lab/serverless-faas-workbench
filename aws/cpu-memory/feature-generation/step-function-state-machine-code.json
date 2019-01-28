@@ -1,0 +1,44 @@
+{
+  "StartAt": "OrcheStrator",
+  "States": {
+    "OrcheStrator": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:741926482963:function:feature_generator_orchestrator",
+      "ResultPath": "$.num_of_file",
+      "Next": "Wait X Seconds"
+    },
+    "Wait X Seconds": {
+      "Type": "Wait",
+      "Seconds": 12,
+      "Next": "Get Job Status"
+    },
+    "Get Job Status": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:741926482963:function:get_job_status",
+      "Next": "Job Complete?",
+      "InputPath": "$.num_of_file",
+      "ResultPath": "$"
+    },
+    "Job Complete?": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.status",
+          "StringEquals": "FAILED",
+          "Next": "Wait X Seconds"
+        },
+        {
+           "Variable": "$.status",
+           "StringEquals": "SUCCEEDED",
+           "Next": "Feature Merge"
+        }
+      ],
+      "Default": "Wait X Seconds"
+    },
+    "Feature Merge": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:741926482963:function:feature_merge",
+      "End": true
+    }
+  }
+}

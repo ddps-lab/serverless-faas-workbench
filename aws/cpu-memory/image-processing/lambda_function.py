@@ -43,5 +43,5 @@ def lambda_handler(event, context):
             s3_client.upload_file(upload_path, 'result-image-data-augmentation', upload_path.split("/")[FILE_NAME_INDEX])
 
         latency_list.append(latency)
-
+    print latency_list
     return latency_list

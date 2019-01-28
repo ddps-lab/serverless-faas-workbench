@@ -20,12 +20,6 @@ def linpack(N):
     X=linalg.solve(A,B)
     latency = time() - start
 
-    R=A*X-B
-
-    Rs=asscalar(max(abs(R.A)))
-
-    nx=asscalar(max(abs(X)))
-
     mflops = (ops*1e-6/latency)
 
     result = {

@@ -27,16 +27,24 @@ def predict(img_local_path):
     return latency, res
 
 def lambda_handler(event, context):
+    latency_list = []
+
+    s3_client.download_file('kmu-serverless-deeplearning-model', 'squeezenet_weights_tf_dim_ordering_tf_kernels.h5', '/tmp/squeezenet_weights_tf_dim_ordering_tf_kernels.h5')
+    
     for record in event['Records']:
         bucket = record['s3']['bucket']['name']
         key = record['s3']['object']['key']
         download_path = '/tmp/{}{}'.format(uuid.uuid4(), key)
 
-    s3_client.download_file(bucket, key, download_path)
-    s3_client.download_file('kmu-serverless-deeplearning-model', 'squeezenet_weights_tf_dim_ordering_tf_kernels.h5', '/tmp/squeezenet_weights_tf_dim_ordering_tf_kernels.h5')
-    lantecy, result = predict(download_path)
-    _tmp_dic = {x[1]: {'N': str(x[2])} for x in result[0]}
-    print(latency)
-    print(_tmp_dic)
+        s3_client.download_file(bucket, key, download_path)
+        
+        lantecy, result = predict(download_path)
+        
+        latency_list.append(latency)
+        _tmp_dic = {x[1]: {'N': str(x[2])} for x in result[0]}
+        
+        print(latency)
+        print(_tmp_dic)
 
-    return latency
+    print(latency_list)
+    return latency_list

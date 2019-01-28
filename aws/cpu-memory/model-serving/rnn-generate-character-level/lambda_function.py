@@ -5,6 +5,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
+from time import time
 
 import rnn
 
@@ -78,6 +79,9 @@ Language
 def lambda_handler(event, context):
     language = event['language']
     start_letters = event['start_letters']
+    start = time()
     output_names = list(samples(language, start_letters))
+    latency = time() - start
     print(output_names)
-    return output_names
+    print(latency)
+    return latency

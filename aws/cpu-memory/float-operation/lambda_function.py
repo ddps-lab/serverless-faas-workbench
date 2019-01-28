@@ -14,3 +14,4 @@ def lambda_handler(event, context):
     N = int(event['N'])
     result = float_operations(N)
     print(result)
+    return result

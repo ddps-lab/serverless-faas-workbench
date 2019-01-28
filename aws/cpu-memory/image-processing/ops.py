@@ -52,14 +52,16 @@ def filter(image, file_name):
     img.save(path)
     path_list.append(path)
 
+    return path_list
+
 def gray_scale(image, file_name):
     path = TMP + "gray-scale-" + file_name
     img = image.convert('L')
-    img.svae(path)
+    img.save(path)
     return [path]
 
 def resize(image, file_name):
     path = TMP + "resized-" + file_name
-    img = image.thumbnail((128, 128))
-    img.save(path)
+    image.thumbnail((128, 128))
+    image.save(path)
     return [path]

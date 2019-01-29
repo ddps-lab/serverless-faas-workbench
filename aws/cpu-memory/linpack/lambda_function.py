@@ -2,7 +2,7 @@ from numpy import matrix, array, linalg, random, amax, asscalar
 from time import time
 
 def linpack(N):
-	eps=2.22e-16
+    eps=2.22e-16
 
     ops=(2.0*N)*N*N/3.0+(2.0*N)*N
 
@@ -23,11 +23,11 @@ def linpack(N):
     mflops = (ops*1e-6/latency)
 
     result = {
-    	'mflops': mflops,
-    	'latency': latency
+        'mflops': mflops,
+        'latency': latency
     }
 
-	return result
+    return result
 
 def lambda_handler(event, context):
     N = int(event['N'])

@@ -1,7 +1,6 @@
 import boto3
 import os
 import sys
-import uuid
 from time import time
 
 import cv2
@@ -42,21 +41,17 @@ def video_processing(file_name, video_path):
     return latency, result_file_path
 
 def lambda_handler(event, context):
-    latency_list = []
+    src_bucket = event['src_bucket']
+    object_key = event['object_key']
+    dst_bucket = event['dst_bucket']
+    download_path = '/tmp/'+object_key
 
-    for record in event['Records']:
-        bucket = record['s3']['bucket']['name']
-        key = record['s3']['object']['key']
-        download_path = '/tmp/{}{}'.format(uuid.uuid4(), key)
+    s3_client.download_file(src_bucket, object_key, download_path)
+    file_name = key.split(".")[FILE_NAME_INDEX]
 
-        s3_client.download_file(bucket, key, download_path)
-        file_name = key.split(".")[FILE_NAME_INDEX]
+    latency, upload_path = video_processing(file_name, download_path)
 
-        latency, upload_path = video_processing(file_name, download_path)
+    s3_client.upload_file(upload_path, dst_bucket, upload_path.split("/")[FILE_PATH_INDEX])
 
-        s3_client.upload_file(upload_path, 'result-video-processing', upload_path.split("/")[FILE_PATH_INDEX])
-
-        latency_list.append(latency)
-
-    print latency_list
-    return latency_list
+    print latency
+    return latency

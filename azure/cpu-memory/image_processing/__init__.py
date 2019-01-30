@@ -92,7 +92,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     container_name = req.params.get('container_name')
     blob_name = req.params.get('blob_name')
 
-    block_blob_service = BlockBlobService(account_name=acc_name, account_key='UlxCHsQYddgmjpoqRxagIKZXOtknMbsc3oxaRYJa5pSaaeNEE+oDm5ooQnLoBxvzRQxEMPFjpRR1b/+8UhjPpA==')
+    block_blob_service = BlockBlobService(account_name=acc_name, account_key=acc_key)
     logging.info(block_blob_service)
     block_blob_service.set_container_acl(container_name, public_access=PublicAccess.Container)
     generator = block_blob_service.list_blobs(container_name)

@@ -47,9 +47,8 @@ def lambda_handler(event, context):
     download_path = '/tmp/'+object_key
 
     s3_client.download_file(src_bucket, object_key, download_path)
-    file_name = key.split(".")[FILE_NAME_INDEX]
 
-    latency, upload_path = video_processing(file_name, download_path)
+    latency, upload_path = video_processing(object_key, download_path)
 
     s3_client.upload_file(upload_path, dst_bucket, upload_path.split("/")[FILE_PATH_INDEX])
 

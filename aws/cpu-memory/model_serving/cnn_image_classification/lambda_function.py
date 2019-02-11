@@ -1,18 +1,14 @@
 import boto3
-from tensorflow.python import keras
 from tensorflow.python.keras.preprocessing import image
 from tensorflow.python.keras.applications.resnet50 import preprocess_input, decode_predictions
 import numpy as np
-import io
-import os
-from PIL import Image
-import h5py
 import uuid
 from time import time
 
 from squeezenet import SqueezeNet
 
 s3_client = boto3.client('s3')
+
 
 def predict(img_local_path):
     start = time()
@@ -26,25 +22,24 @@ def predict(img_local_path):
     latency = time() - start
     return latency, res
 
+
 def lambda_handler(event, context):
-    latency_list = []
+    model_bucket = event['model_bucket']
+    model_key = event['model_key']
+    input_bucket = event['input_bucket']
+    input_key = event['input_key']
 
-    s3_client.download_file('kmu-serverless-deeplearning-model', 'squeezenet_weights_tf_dim_ordering_tf_kernels.h5', '/tmp/squeezenet_weights_tf_dim_ordering_tf_kernels.h5')
+    file_path = '/tmp/' + model_key
+    s3_client.download_file(model_bucket, model_key, file_path)
     
-    for record in event['Records']:
-        bucket = record['s3']['bucket']['name']
-        key = record['s3']['object']['key']
-        download_path = '/tmp/{}{}'.format(uuid.uuid4(), key)
+    download_path = '/tmp/'+input_key
+    s3_client.download_file(input_bucket, input_key, download_path)
+        
+    latency, result = predict(download_path)
+        
+    _tmp_dic = {x[1]: {'N': str(x[2])} for x in result[0]}
+        
+    print(latency)
+    print(_tmp_dic)
 
-        s3_client.download_file(bucket, key, download_path)
-        
-        lantecy, result = predict(download_path)
-        
-        latency_list.append(latency)
-        _tmp_dic = {x[1]: {'N': str(x[2])} for x in result[0]}
-        
-        print(latency)
-        print(_tmp_dic)
-
-    print(latency_list)
-    return latency_list
+    return latency

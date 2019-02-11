@@ -2,7 +2,6 @@ import boto3
 from tensorflow.python.keras.preprocessing import image
 from tensorflow.python.keras.applications.resnet50 import preprocess_input, decode_predictions
 import numpy as np
-import uuid
 from time import time
 
 from squeezenet import SqueezeNet

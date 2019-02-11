@@ -2,6 +2,7 @@ from PIL import Image, ImageFilter
 
 TMP = "/tmp/"
 
+
 def flip(image, file_name):
     path_list = []
     path = TMP + "flip-left-right-" + file_name
@@ -15,6 +16,7 @@ def flip(image, file_name):
     path_list.append(path)
 
     return path_list
+
 
 def rotate(image, file_name):
     path_list = []
@@ -35,6 +37,7 @@ def rotate(image, file_name):
 
     return path_list
 
+
 def filter(image, file_name):
     path_list = []
     path = TMP + "blur-" + file_name
@@ -54,11 +57,13 @@ def filter(image, file_name):
 
     return path_list
 
+
 def gray_scale(image, file_name):
     path = TMP + "gray-scale-" + file_name
     img = image.convert('L')
     img.save(path)
     return [path]
+
 
 def resize(image, file_name):
     path = TMP + "resized-" + file_name

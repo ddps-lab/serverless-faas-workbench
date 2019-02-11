@@ -1,18 +1,19 @@
 import numpy as np
 from time import time
 
-def matmul(N):
-    A = np.random.rand(N, N)
-    B = np.random.rand(N, N)
+
+def matmul(n):
+    A = np.random.rand(n, n)
+    B = np.random.rand(n, n)
 
     start = time()
     C = np.matmul(A, B)
     latency = time() - start
-
     return latency
 
+
 def lambda_handler(event, context):
-    N = int(event['N'])
-    result = matmul(N)
+    n = int(event['n'])
+    result = matmul(n)
     print(result)
     return result

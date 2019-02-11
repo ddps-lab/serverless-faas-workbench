@@ -34,5 +34,5 @@ def lambda_handler(event, context):
     print(latency)
 
     write_key = event['key'].split('.')[0] + ".txt"
-    s3.put_object(Body=feature, Bucket='kmu-serverless-feature-extract', Key=write_key)
+    s3.put_object(Body=feature, Bucket=bucket, Key=write_key)
     return latency

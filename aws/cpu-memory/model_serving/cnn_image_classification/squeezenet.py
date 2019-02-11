@@ -1,7 +1,6 @@
 from tensorflow.python.keras._impl.keras.applications.imagenet_utils import _obtain_input_shape
 from tensorflow.python.keras._impl.keras import backend as K
-from tensorflow.python.keras._impl.keras.layers import Input, Convolution2D, MaxPooling2D, Activation, concatenate, \
-    Dropout
+from tensorflow.python.keras._impl.keras.layers import Input, Convolution2D, MaxPooling2D, Activation, concatenate, Dropout
 from tensorflow.python.keras._impl.keras.layers import GlobalAveragePooling2D, GlobalMaxPooling2D
 from tensorflow.python.keras._impl.keras.models import Model
 from tensorflow.python.keras._impl.keras.engine.topology import get_source_inputs
@@ -18,7 +17,6 @@ WEIGHTS_PATH_NO_TOP = "https://github.com/rcmalli/keras-squeezenet/releases/down
 
 
 # Modular function for Fire Node
-
 def fire_module(x, fire_id, squeeze=16, expand=64):
     s_id = 'fire' + str(fire_id) + '/'
 
@@ -39,8 +37,8 @@ def fire_module(x, fire_id, squeeze=16, expand=64):
     x = concatenate([left, right], axis=channel_axis, name=s_id + 'concat')
     return x
 
-# Original SqueezeNet from paper.
 
+# Original SqueezeNet from paper.
 def SqueezeNet(include_top=True, weights='imagenet',
                input_tensor=None, input_shape=None,
                pooling=None,

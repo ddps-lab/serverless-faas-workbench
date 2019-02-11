@@ -1,15 +1,13 @@
 import boto3
-import os
-import sys
 import uuid
 from time import time
-from PIL import Image, ImageFilter
+from PIL import Image
 
 import ops
 
 s3_client = boto3.client('s3')
-
 FILE_NAME_INDEX = 2
+
 
 def image_processing(file_name, image_path):
     path_list = []
@@ -25,23 +23,20 @@ def image_processing(file_name, image_path):
     latency = time() - start
     return latency, path_list
 
+
 def lambda_handler(event, context):
-    latency_list = []
+    bucket = event['bucket']
+    key = event['key']
+    output_bucket = event['output_bucket']
 
-    for record in event['Records']:
-        bucket = record['s3']['bucket']['name']
-        key = record['s3']['object']['key']
-        download_path = '/tmp/{}{}'.format(uuid.uuid4(), key)
+    download_path = '/tmp/{}{}'.format(uuid.uuid4(), key)
 
-        s3_client.download_file(bucket, key, download_path)
+    s3_client.download_file(bucket, key, download_path)
 
-        file_name = key
-        
-        latency, path_list = image_processing(file_name, download_path)
-        
-        for upload_path in path_list:
-            s3_client.upload_file(upload_path, 'result-image-data-augmentation', upload_path.split("/")[FILE_NAME_INDEX])
+    latency, path_list = image_processing(key, download_path)
+    print(latency)
 
-        latency_list.append(latency)
-    print latency_list
-    return latency_list
+    for upload_path in path_list:
+        s3_client.upload_file(upload_path, output_bucket, upload_path.split("/")[FILE_NAME_INDEX])
+
+    return latency

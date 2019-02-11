@@ -1,26 +1,25 @@
-from numpy import matrix, array, linalg, random, amax, asscalar
+from numpy import matrix, linalg, random
 from time import time
 
-def linpack(N):
-    eps=2.22e-16
 
-    ops=(2.0*N)*N*N/3.0+(2.0*N)*N
+def linpack(n):
+    # LINPACK benchmarks
+    ops = (2.0 * n) * n * n / 3.0 + (2.0 * n) * n
 
     # Create AxA array of random numbers -0.5 to 0.5
-    A=random.random_sample((N,N))-0.5
-    B=A.sum(axis=1)
+    A = random.random_sample((n, n)) - 0.5
+    B = A.sum(axis=1)
 
     # Convert to matrices
-    A=matrix(A)
+    A = matrix(A)
+    B = matrix(B.reshape((n, 1)))
 
-    B=matrix(B.reshape((N,1)))
-    na=amax(abs(A.A))
-
+    # Ax = B
     start = time()
-    X=linalg.solve(A,B)
+    x = linalg.solve(A, B)
     latency = time() - start
 
-    mflops = (ops*1e-6/latency)
+    mflops = (ops * 1e-6 / latency)
 
     result = {
         'mflops': mflops,
@@ -29,8 +28,9 @@ def linpack(N):
 
     return result
 
+
 def lambda_handler(event, context):
-    N = int(event['N'])
-    result = linpack(N)
+    n = int(event['n'])
+    result = linpack(n)
     print(result)
     return result

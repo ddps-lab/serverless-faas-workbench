@@ -6,6 +6,7 @@ from time import time
 
 TMP = "/tmp/"
 
+
 def flip(image, file_name):
     path_list = []
     path = TMP + "flip-left-right-" + file_name
@@ -19,6 +20,7 @@ def flip(image, file_name):
     path_list.append(path)
 
     return path_list
+
 
 def rotate(image, file_name):
     path_list = []
@@ -39,6 +41,7 @@ def rotate(image, file_name):
 
     return path_list
 
+
 def filter(image, file_name):
     path_list = []
     path = TMP + "blur-" + file_name
@@ -58,23 +61,27 @@ def filter(image, file_name):
 
     return path_list
 
+
 def gray_scale(image, file_name):
     path = TMP + "gray-scale-" + file_name
     img = image.convert('L')
     img.save(path)
+
     return [path]
+
 
 def resize(image, file_name):
     path = TMP + "resized-" + file_name
     image.thumbnail((128, 128))
     image.save(path)
+
     return [path]
+
 
 def image_processing(file_name, image_path):
     path_list = []
     start = time()
     with Image.open(image_path) as image:
-        tmp = image
         path_list += flip(image, file_name)
         path_list += rotate(image, file_name)
         path_list += filter(image, file_name)
@@ -82,11 +89,11 @@ def image_processing(file_name, image_path):
         path_list += resize(image, file_name)
 
     latency = time() - start
+
     return latency, path_list
 
+
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
-    
     acc_name = req.params.get('account_name')
     acc_key = req.params.get('account_key')
     container_name = req.params.get('container_name')
@@ -107,5 +114,5 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     for upload_path in path_list:
         block_blob_service.create_blob_from_path(container_name, upload_path.split("/")[2], upload_path)
-    logging.info(latency)
+
     return func.HttpResponse(str(latency))

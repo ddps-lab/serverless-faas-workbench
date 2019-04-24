@@ -1,18 +1,17 @@
 import boto3
 import uuid
 from time import time
-
 import cv2
 
 s3_client = boto3.client('s3')
 
-TMP = "/tmp/"
+tmp = "/tmp/"
 FILE_NAME_INDEX = 0
 FILE_PATH_INDEX = 2
 
 
 def video_processing(file_name, video_path):
-    result_file_path = '/tmp/'+file_name+'-output.avi'
+    result_file_path = tmp+file_name+'-output.avi'
 
     video = cv2.VideoCapture(video_path)
 
@@ -28,8 +27,9 @@ def video_processing(file_name, video_path):
 
         if ret:
             gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            im = cv2.imwrite('/tmp/tmp.jpg', gray_frame)
-            gray_frame = cv2.imread('/tmp/tmp.jpg')
+            tmp_file_path = tmp+'tmp.jpg'
+            cv2.imwrite(tmp_file_path, gray_frame)
+            gray_frame = cv2.imread(tmp_file_path)
             out.write(gray_frame)
         else:
             break
@@ -46,7 +46,7 @@ def lambda_handler(event, context):
     object_key = event['object_key']
     output_bucket = event['output_bucket']
 
-    download_path = '/tmp/{}{}'.format(uuid.uuid4(), object_key)
+    download_path = tmp+'{}{}'.format(uuid.uuid4(), object_key)
 
     s3_client.download_file(input_bucket, object_key, download_path)
 

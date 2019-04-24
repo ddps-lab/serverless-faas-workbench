@@ -25,7 +25,7 @@ def image_processing(file_name, image_path):
 
 
 def lambda_handler(event, context):
-    bucket = event['bucket']
+    bucket = event['input_bucket']
     key = event['key']
     output_bucket = event['output_bucket']
 
@@ -34,7 +34,6 @@ def lambda_handler(event, context):
     s3_client.download_file(bucket, key, download_path)
 
     latency, path_list = image_processing(key, download_path)
-    print(latency)
 
     for upload_path in path_list:
         s3_client.upload_file(upload_path, output_bucket, upload_path.split("/")[FILE_NAME_INDEX])

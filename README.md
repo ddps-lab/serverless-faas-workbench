@@ -11,11 +11,11 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
 
 ## FunctionBench workloads
 ### 1. CPU & Memory
- - Float Operations(sin, cos, sqrt)
- - MatMul(square matrix multiplication)
- - Linpack(solve linear equations Ax = b)
- - Image Processing
- - Video Processing
+ - [Float Operations(sin, cos, sqrt)](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/float-operation)
+ - [MatMul(square matrix multiplication)](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/matmul)
+ - [Linpack(solve linear equations Ax = b)](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/linpack)
+ - [Image Processing](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/image-processing)
+ - [Video Processing](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/video-processing)
  - Feature Generation
  - Model Training
  - Model Serving
@@ -33,13 +33,16 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
  
 ## Required Cloud Service
 ### AWS
- - [EC2](https://aws.amazon.com/ec2/)
- - [S3](https://aws.amazon.com/s3/)
- - [Step Functions](https://aws.amazon.com/step-functions/)
- - [IAM](https://aws.amazon.com/iam/)
+ - [AWS Lambda](https://aws.amazon.com/lambda/)
+ - [AWS EC2](https://aws.amazon.com/ec2/)
+ - [AWS S3](https://aws.amazon.com/s3/)
+ - [AWS Step Functions](https://aws.amazon.com/step-functions/)
+ - [AWS IAM](https://aws.amazon.com/iam/)
  
 ### Google Cloud
+ - [Google Cloud Functions](https://cloud.google.com/functions/) 
  - [Google Cloud Buckets](https://cloud.google.com/storage/)
 
 ### Azure
+ - [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
  - [Azure Storage](https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction)

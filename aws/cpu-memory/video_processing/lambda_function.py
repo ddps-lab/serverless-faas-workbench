@@ -1,6 +1,5 @@
 import boto3
-import os
-import sys
+import uuid
 from time import time
 
 import cv2
@@ -10,6 +9,7 @@ s3_client = boto3.client('s3')
 TMP = "/tmp/"
 FILE_NAME_INDEX = 0
 FILE_PATH_INDEX = 2
+
 
 def video_processing(file_name, video_path):
     result_file_path = '/tmp/'+file_name+'-output.avi'
@@ -40,17 +40,18 @@ def video_processing(file_name, video_path):
     out.release()
     return latency, result_file_path
 
-def lambda_handler(event, context):
-    src_bucket = event['src_bucket']
-    object_key = event['object_key']
-    dst_bucket = event['dst_bucket']
-    download_path = '/tmp/'+object_key
 
-    s3_client.download_file(src_bucket, object_key, download_path)
+def lambda_handler(event, context):
+    input_bucket = event['input_bucket']
+    object_key = event['object_key']
+    output_bucket = event['output_bucket']
+
+    download_path = '/tmp/{}{}'.format(uuid.uuid4(), object_key)
+
+    s3_client.download_file(input_bucket, object_key, download_path)
 
     latency, upload_path = video_processing(object_key, download_path)
 
-    s3_client.upload_file(upload_path, dst_bucket, upload_path.split("/")[FILE_PATH_INDEX])
+    s3_client.upload_file(upload_path, output_bucket, upload_path.split("/")[FILE_PATH_INDEX])
 
-    print latency
     return latency

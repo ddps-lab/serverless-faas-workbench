@@ -5,9 +5,9 @@ and the application-benchmark represents realistic data-oriented applications th
 With the introduction of FunctionBench, we believe that researchers can easily deploy function applications to evaluate their proposed systems and algorithms justly. 
 To the best of our knowledge, the proposed FunctionBench is the first publicly available realistic FaaS workload suites that are ready to be deployed on public cloud services.
 
-- AWS Lambda
-- Google Cloud Functions
-- Azure Functions
+- [AWS Lambda](https://aws.amazon.com/lambda/)
+- [Google Cloud Functions](https://cloud.google.com/functions/) 
+- [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
 
 ## FunctionBench workloads
 ### 1. CPU & Memory
@@ -19,10 +19,10 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
  - Feature Generation
  - Model Training
  - Model Serving
- -- Video Face Detection - Cascade Classifier
- -- Classification Image - CNN
- -- Generating Names- RNN
- -- Prediction Reviews - LR
+    - Video Face Detection - Cascade Classifier
+    - Classification Image - CNN
+    - Generating Names- RNN
+    - Prediction Reviews - LR
  
 ### 2. Disk
  - dd
@@ -33,13 +33,13 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
  
 ## Required Cloud Service
 ### AWS
- - EC2
- - S3
- - Step Functions
- - IAM
+ - [EC2](https://aws.amazon.com/ec2/)
+ - [S3](https://aws.amazon.com/s3/)
+ - [Step Functions](https://aws.amazon.com/step-functions/)
+ - [IAM](https://aws.amazon.com/iam/)
  
 ### Google Cloud
- - Google Cloud Buckets
+ - [Google Cloud Buckets](https://cloud.google.com/storage/)
 
 ### Azure
- - Azure Storage
+ - [Azure Storage](https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction)

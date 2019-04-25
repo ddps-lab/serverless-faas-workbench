@@ -22,7 +22,7 @@ def video_processing(file_name, video_path):
     out = cv2.VideoWriter(result_file_path, fourcc, 20.0, (width, height))
 
     start = time()
-    while(video.isOpened()):
+    while video.isOpened():
         ret, frame = video.read()
 
         if ret:

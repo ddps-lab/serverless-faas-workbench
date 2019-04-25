@@ -49,7 +49,6 @@ def video_processing(object_key, video_path, model_path):
 
 
 def lambda_handler(event, context):
-
     input_bucket = event['input_bucket']
     object_key = event['object_key']
     output_bucket = event['output_bucket']

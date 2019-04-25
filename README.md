@@ -1,5 +1,4 @@
-# FunctionBench
-![function_bench_icon](./docs/images/function_bench_icon.png)
+# FunctionBench ![function_bench_icon](./docs/images/function_bench_icon.png)
 
 ## PUBLICATION
 _Jeongchul Kim and Kyungyong Lee, 'Function Bench : A Suite of Workloads for Serverless Cloud Function Service',

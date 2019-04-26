@@ -1,3 +1,8 @@
+"""
+Reference : https://github.com/rcmalli/keras-squeezenet
+SqueezeNet v1.1 Implementation using Keras Functional Framework 2.0
+
+"""
 from tensorflow.python.keras._impl.keras.applications.imagenet_utils import _obtain_input_shape
 from tensorflow.python.keras._impl.keras import backend as K
 from tensorflow.python.keras._impl.keras.layers import Input, Convolution2D, MaxPooling2D, Activation, concatenate, Dropout

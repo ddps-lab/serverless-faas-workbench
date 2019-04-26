@@ -1,36 +1,48 @@
-import asyncio
-import logging
-from py3iperf3.iperf3_client import Iperf3Client
-from py3iperf3.iperf3_api import Iperf3TestProto
-from py3iperf3.utils import setup_logging
+import subprocess
+import json
 
-def get_log():
-    log =  open("/tmp/log.out").readlines()
-    log = "".join(log)
-    return log
+kilo = 1000
+byte = 8
+
+
+def network_test(server_ip, server_port, test_time, reverse):
+    reverse_option = ""
+    if reverse:
+        reverse_option = "R"
+
+    sp = subprocess.Popen(["./iperf3",
+                           "-c",
+                           server_ip,
+                           "-p",
+                           str(server_port),
+                           reverse_option,
+                           "-t",
+                           test_time,
+                           "-Z",
+                           "-J"
+                           ],
+                          stdout=subprocess.PIPE,
+                          stderr=subprocess.PIPE)
+
+    out, err = sp.communicate()
+
+    end = json.loads(out)["end"]
+
+    sender = end["sum_sent"]
+    receiver = end["sum_received"]
+
+    send_mbit_s = sender["bits_per_second"] / kilo / kilo / byte
+    recv_mbit_s = receiver["bits_per_second"] / kilo / kilo / byte
+
+    return send_mbit_s, recv_mbit_s
+
 
 def lambda_handler(event, context):
-    params = {}
-    params['protocol'] = Iperf3TestProto.TCP
-    params['server_address'] = event['address']
-    params['server-port'] = event['port']
-    params['test_duration'] = event['num_test']
-    params['get-server-output'] = True
-    params['parallel'] = 26
-    setup_logging(**params)
-        
-    loop = asyncio.get_event_loop()
-    
-    iperf3_client = Iperf3Client(loop=loop)
-    iperf3_client.create_test(test_parameters=params)
-    
-    loop.call_soon(iperf3_client.run_all_tests)
-    loop.run_forever()
-    
-    iperf3_client.stop_all_tests()
-    
-    log = get_log()
-    print(log)
-    return log
-    
-   
+    server_ip = event['server_ip']
+    server_port = event['server_port']
+    test_time = event['test_time']
+    reverse = event['reverse']
+
+    send_mbit_s, recv_mbit_s = network_test(server_ip, server_port, test_time, reverse)
+
+    return {'send_mbit_s': send_mbit_s, 'recv_mbit_s': recv_mbit_s}

@@ -1,9 +1,7 @@
 import boto3
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.externals import joblib
-
 import pandas as pd
-
 from time import time
 import os
 import re
@@ -25,7 +23,7 @@ def lambda_handler(event, context):
     dataset_object_key = event['dataset_object_key']
     dataset_bucket = event['dataset_bucket']
 
-    model_object_key = event['model_object_key'] # example : lr_model.pk
+    model_object_key = event['model_object_key']  # example : lr_model.pk
     model_bucket = event['model_bucket']
 
     model_path = tmp + model_object_key

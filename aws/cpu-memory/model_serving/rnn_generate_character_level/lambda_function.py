@@ -55,6 +55,5 @@ def lambda_handler(event, context):
     start = time()
     output_names = list(rnn_model.samples(language, start_letters))
     latency = time() - start
-    print(output_names)
-    print(latency)
-    return latency
+
+    return {'latency':latency, 'predict':output_names}

@@ -24,17 +24,17 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
  - Feature Generation
  - Model Training
  - Model Serving
-    - Video Face Detection - Cascade Classifier
-    - Classification Image - CNN
-    - Generating Names- RNN
-    - Prediction Reviews - LR
+    - [Video Face Detection - Cascade Classifier](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/video-face-detection)
+    - [Classification Image - CNN](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/classification-image)
+    - [Generating Names- RNN](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/generating-names-rnn)
+    - [Prediction Reviews - LR](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/ml_lr_prediction)
  
 ### 2. Disk
- - dd
+ - [dd](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/dd)
 
 ### 3. Network
- - iPerf3
- - Cloud storage service download-upload
+ - [iPerf3](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/iperf3)
+ - [Cloud storage service download-upload](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/cloud-storage)
  
 ## Required Cloud Service
 ### AWS
@@ -51,3 +51,6 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
 ### Azure
  - [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
  - [Azure Storage](https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction)
+
+
+[]: https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/ml_lr_prediction

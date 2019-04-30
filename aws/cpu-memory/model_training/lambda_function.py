@@ -22,12 +22,12 @@ def cleanup(sentence):
 
 
 def lambda_handler(event, context):
-    input_bucket = event['input_bucket']
-    object_key = event['object_key']
+    dataset_bucket = event['dataset_bucket']
+    dataset_object_key = event['dataset_object_key']
     model_bucket = event['model_bucket']
     model_object_key = event['model_object_key']  # example : lr_model.pk
 
-    df = pd.read_csv('s3://'+input_bucket+object_key)
+    df = pd.read_csv('s3://'+dataset_bucket+dataset_object_key)
 
     start = time()
     df['train'] = df['Text'].apply(cleanup)

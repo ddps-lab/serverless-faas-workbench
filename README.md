@@ -22,7 +22,7 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
  - [Image Processing](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/image-processing)
  - [Video Processing](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/video-processing)
  - Feature Generation
- - Model Training
+ - [Model Training](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/model-training)
  - Model Serving
     - [Video Face Detection - Cascade Classifier](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/video-face-detection)
     - [Classification Image - CNN](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/classification-image)

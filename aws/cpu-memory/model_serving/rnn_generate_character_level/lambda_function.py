@@ -9,7 +9,6 @@ from time import time
 
 
 s3_client = boto3.client('s3')
-
 tmp = "/tmp/"
 
 """
@@ -28,7 +27,7 @@ def lambda_handler(event, context):
     model_object_key = event['model_object_key']  # example : rnn_model.pth
     model_bucket = event['model_bucket']
 
-    # Load preprocessing parameters
+    # Load pre-processing parameters
     # Check if model parameters are available
     parameter_path = tmp + model_parameter_object_key
     if not os.path.isfile(parameter_path):
@@ -56,4 +55,4 @@ def lambda_handler(event, context):
     output_names = list(rnn_model.samples(language, start_letters))
     latency = time() - start
 
-    return {'latency':latency, 'predict':output_names}
+    return {'latency': latency, 'predict': output_names}

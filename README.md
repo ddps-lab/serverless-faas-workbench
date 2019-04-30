@@ -51,6 +51,4 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
 ### Azure
  - [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
  - [Azure Storage](https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction)
-
-
-[]: https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/ml_lr_prediction
+ 

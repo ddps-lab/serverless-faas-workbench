@@ -17,7 +17,7 @@ def lambda_handler(event, context):
         body = obj.get()['Body'].read()
         start = time()
         word = body.replace("'", '').split(',')
-        result.append(word)
+        result.extend(word)
         latency += time() - start
 
     print(len(result))

@@ -1,5 +1,6 @@
 import boto3
 from time import time
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 s3 = boto3.resource('s3')
 s3_client = boto3.client('s3')
@@ -9,20 +10,23 @@ def lambda_handler(event, context):
     bucket = event['input_bucket']
     s3_bucket = s3.Bucket(bucket)
 
-    result = set()
+    result = []
     latency = 0
 
     for obj in s3_bucket.objects.all():
         body = obj.get()['Body'].read()
         start = time()
-        feature = body.replace("'", '').split(',')
-        result.update(feature)
+        word = body.replace("'", '').split(',')
+        result.append(word)
         latency += time() - start
 
     print(len(result))
-    print(latency)
+
+    tfidf_vect = TfidfVectorizer().fit(result)
+    feature = str(tfidf_vect.get_feature_names())
+    feature = feature.lstrip('[').rstrip(']').replace(' ' , '')
     
-    write_key = "result.txt"
-    s3_client.put_object(Body=str(result), Bucket=bucket, Key=write_key)
+    feature_key = 'feature.txt'
+    s3_client.put_object(Body=str(feature), Bucket=bucket, Key=feature_key)
 
     return latency

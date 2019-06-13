@@ -30,12 +30,12 @@
         {
            "Variable": "$.status",
            "StringEquals": "SUCCEEDED",
-           "Next": "Feature Merge"
+           "Next": "Feature Reducer"
         }
       ],
       "Default": "Wait X Seconds"
     },
-    "Feature Merge": {
+    "Feature Reducer": {
       "Type": "Task",
       "Resource": "[FEATURE-REDUCER-FUNCTION-ARN]",
       "End": true

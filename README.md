@@ -21,7 +21,7 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
  - [Linpack(solve linear equations Ax = b)](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/linpack)
  - [Image Processing](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/image-processing)
  - [Video Processing](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/video-processing)
- - Feature Generation
+ - [Feature Generation](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/feature-generation)
  - [Model Training](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/model-training)
  - Model Serving
     - [Video Face Detection - Cascade Classifier](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/video-face-detection)

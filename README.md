@@ -22,8 +22,8 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
  - [Image Processing](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/image-processing)
  - [Video Processing](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/video-processing)
  - MapReduce
- - Chameleon
- - pyaes
+ - [Chameleon](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/chameleon)
+ - [pyaes](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/pyaes)
  - [Feature Generation](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/feature-generation)
  - [Model Training](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/model-training)
  - Model Serving

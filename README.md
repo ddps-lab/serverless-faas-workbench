@@ -21,7 +21,7 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
  - [Linpack(solve linear equations Ax = b)](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/linpack)
  - [Image Processing](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/image-processing)
  - [Video Processing](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/video-processing)
- - MapReduce
+ - [MapReduce](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/mapreduce)
  - [Chameleon](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/chameleon)
  - [pyaes](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/pyaes)
  - [Feature Generation](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/feature-generation)

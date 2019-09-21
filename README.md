@@ -34,7 +34,7 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
  
 ### 2. Disk
  - [dd](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/dd)
- - gzip
+ - [gzip-compression](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/gzip-compression)
 
 ### 3. Network
  - [iPerf3](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/iperf3)

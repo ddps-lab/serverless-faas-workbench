@@ -30,4 +30,4 @@ def lambda_handler(event, context):
         aes = None
 
     latency = time() - start
-    return {'ciphertext':ciphertext, 'latency':latency}
+    return latency

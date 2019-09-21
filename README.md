@@ -39,7 +39,7 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
 ### 3. Network
  - [iPerf3](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/iperf3)
  - [Cloud storage service download-upload](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/cloud-storage)
- - json serialization deserialization
+ - [json serialization deserialization](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/json)
  
 ## Required Cloud Service
 ### AWS

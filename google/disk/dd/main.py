@@ -1,6 +1,7 @@
 import os
 import subprocess
 
+
 def function_handler(request):
     request_json = request.get_json(silent=True)
     bs = 'bs='+request_json['bs']
@@ -14,7 +15,6 @@ def function_handler(request):
     output = subprocess.check_output(['ls', '-alh', '/tmp/'])
     print(output)
 
-    
     output = subprocess.check_output(['du', '-sh', '/tmp/'])
     print(output)
                                

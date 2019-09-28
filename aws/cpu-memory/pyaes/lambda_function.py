@@ -10,7 +10,7 @@ def generate(length):
 
 
 def lambda_handler(event, context):
-    length_of_message = event['lenght_of_message']
+    length_of_message = event['length_of_message']
     num_of_iterations = event['num_of_iterations']
 
     message = generate(length_of_message)

@@ -21,7 +21,7 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
  - [Linpack(solve linear equations Ax = b)](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/linpack)
  - [Image Processing](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/image-processing)
  - [Video Processing](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/video-processing)
- - MapReduce
+ - [MapReduce](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/mapreduce)
  - [Chameleon](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/chameleon)
  - [pyaes](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/pyaes)
  - [Feature Generation](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/feature-generation)
@@ -34,12 +34,12 @@ To the best of our knowledge, the proposed FunctionBench is the first publicly a
  
 ### 2. Disk
  - [dd](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/dd)
- - gzip
+ - [gzip-compression](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/gzip-compression)
 
 ### 3. Network
  - [iPerf3](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/iperf3)
  - [Cloud storage service download-upload](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/cloud-storage)
- - json serialization deserialization
+ - [json serialization deserialization](https://github.com/kmu-bigdata/serverless-faas-workbench/wiki/json)
  
 ## Required Cloud Service
 ### AWS

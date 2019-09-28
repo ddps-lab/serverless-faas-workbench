@@ -1,4 +1,3 @@
-import functools
 from time import time
 import six
 import json

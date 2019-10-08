@@ -4,7 +4,7 @@
 _Jeongchul Kim and Kyungyong Lee, 'Function Bench : A Suite of Workloads for Serverless Cloud Function Service',
 IEEE International Conference on Cloud Computing 2019, 07/2019 [pdf](https://kimjeongchul.github.io/assets/paper/FunctionBench%20-%20A%20Suite%20of%20Workloads%20for%20Serverless%20Cloud%20Function%20Service.pdf)_
 
-_Jeongchul Kim and Kyungyong Lee, 'Function Bench : Practical Workloads for Serverless FaaS, ACM Symposium on Cloud Computing 2019, 11/2019_
+_Jeongchul Kim and Kyungyong Lee, 'Practical Cloud Workloads for Serverless FaaS, ACM Symposium on Cloud Computing 2019, 11/2019_
 
 The FunctionBench is composed of micro benchmark and application workload; 
 the micro-benchmark uses simple system calls to measure performance of resources exclusively, 

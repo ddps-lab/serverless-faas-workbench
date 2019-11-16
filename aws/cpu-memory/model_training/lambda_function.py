@@ -7,8 +7,9 @@ from sklearn.externals import joblib
 import pandas as pd
 from time import time
 import re
+import io
 
-s3 = boto3.resource('s3')
+
 s3_client = boto3.client('s3')
 
 cleanup_re = re.compile('[^a-z]+')
@@ -27,7 +28,8 @@ def lambda_handler(event, context):
     model_bucket = event['model_bucket']
     model_object_key = event['model_object_key']  # example : lr_model.pk
 
-    df = pd.read_csv('s3://'+dataset_bucket+dataset_object_key)
+    obj = s3_client.get_object(Bucket=dataset_bucket, Key=dataset_object_key)
+    df = pd.read_csv(io.BytesIO(obj['Body'].read()))
 
     start = time()
     df['train'] = df['Text'].apply(cleanup)
@@ -40,9 +42,9 @@ def lambda_handler(event, context):
     model.fit(train, df['Score'])
     latency = time() - start
 
-    model_file_path = tmp+model_object_key
+    model_file_path = tmp + model_object_key
     joblib.dump(model, model_file_path)
 
-    s3.Object(model_bucket, model_object_key).load()
+    s3_client.upload_file(model_file_path, model_bucket, model_object_key)
 
     return latency

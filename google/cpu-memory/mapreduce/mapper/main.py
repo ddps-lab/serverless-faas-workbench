@@ -53,7 +53,8 @@ def function_handler(request):
         
         start = time()
         job_blob.upload_from_string(json.dumps(output))
-        
+        network += time() - start
+
         print(output)
     
     result = {

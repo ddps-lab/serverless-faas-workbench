@@ -12,10 +12,6 @@ computer_language = ["JavaScript", "Java", "PHP", "Python", "C#", "C++",
                      "Scala", "Haskell", "MATLAB", "Clojure", "Groovy"]
 
 
-def write_to_s3(bucket, key, data, metadata):
-    s3.Bucket(bucket).put_object(Key=key, Body=data, Metadata=metadata)
-
-
 def lambda_handler(event, context):
     job_bucket = event['job_bucket']
     src_bucket = event['bucket']
@@ -52,12 +48,13 @@ def lambda_handler(event, context):
     print(output)
 
     metadata = {
-        'output': '%s' % (output),
-        'network': '%s' % (network),
-        'map': '%s' % (map)
+        'output': str(output),
+        'network': str(network),
+        'map': str(map)
     }
 
-    key = '%s' % (mapper_id)
-    write_to_s3(job_bucket, key, json.dumps(output), metadata)
-
+    start = time()
+    s3.Bucket(job_bucket).put_object(Key=str(mapper_id), Body=json.dumps(output), Metadata=metadata)
+    network += time() - start
+    
     return json.dumps(metadata)

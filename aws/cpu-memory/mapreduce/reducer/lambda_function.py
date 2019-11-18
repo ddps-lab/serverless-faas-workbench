@@ -38,12 +38,10 @@ def lambda_handler(event, context):
             output[key] += data[key]
         reduce += time() - start
 
-    print(output)
-
     metadata = {
-        'output': '%s' % (output),
-        'network': '%s' % (network),
-        'reduce': '%s' % (reduce)
+        'output': str(output),
+        'network': str(network),
+        'reduce': str(reduce)
     }
 
     return json.dumps(metadata)

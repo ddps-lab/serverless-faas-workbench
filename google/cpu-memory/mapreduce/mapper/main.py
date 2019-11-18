@@ -11,10 +11,6 @@ computer_language = ["JavaScript", "Java", "PHP", "Python", "C#", "C++",
     "Scala", "Haskell", "MATLAB", "Clojure", "Groovy"]
 
 
-def get_vm_id():
-    print(open('/proc/self/cgroup').read())
-    
-
 def function_handler(request):
     request_json = request.get_json(silent=True)
     job_bucket = request_json['job_bucket']
@@ -24,8 +20,6 @@ def function_handler(request):
     
     d_bucket = storage_client.get_bucket(dataset_bucket)
     j_bucket = storage_client.get_bucket(job_bucket)
-    
-    get_vm_id()
     
     output = {}
     for lang in computer_language:

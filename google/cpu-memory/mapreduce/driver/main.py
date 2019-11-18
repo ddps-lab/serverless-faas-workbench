@@ -12,13 +12,15 @@ total_network = 0
 
 
 def map_invoke_lambda(job_bucket, dataset_bucket, all_keys, batch_size, mapper_id):
+    global total_map, total_network
+
     keys = all_keys[mapper_id*batch_size: (mapper_id+1)*batch_size]
     key = ""
     for item in keys:
         key += item +'/'
     key = key[:-1]
     
-    mapper_url = "https://us-central1-turing-gadget-230018.cloudfunctions.net/mr_mapper"
+    mapper_url = "[YOUR MAPPER HTTP TRIGGER URL]"
     payload = {
         'job_bucket': job_bucket,
         'dataset_bucket': dataset_bucket,
@@ -26,10 +28,22 @@ def map_invoke_lambda(job_bucket, dataset_bucket, all_keys, batch_size, mapper_i
         'mapper_id': mapper_id
     }
     
-    #headers = {'content-type' : 'application/json'}
-    
     response = requests.post(mapper_url, json=payload)
-    print(response.url)
+    print(response.text)
+
+    output = json.loads(response.text)
+    total_map += float(output['map'])
+    total_network += float(output['network'])
+
+
+def reduce_invoke_lambda(job_bucket):
+    reducer_url = "[YOUR REDUCER HTTP TRIGGER URL]"
+
+    payload = {
+        'job_bucket': job_bucket
+    }
+
+    response = requests.post(reducer_url, json=payload)
     print(response.text)
 
 
@@ -41,19 +55,19 @@ def function_handler(request):
     
     storage_client = storage.Client()
     d_bucket = storage_client.get_bucket(dataset_bucket)
-    
+    j_bucket = storage_client.get_bucket(job_bucket)
+
     # Fetch all the keys
     dataset_blobs = d_bucket.list_blobs()
     all_keys = []
     for d_blob in dataset_blobs:
-    	all_keys.append(d_blob.name)
+        all_keys.append(d_blob.name)
 
     total_size = len(all_keys)
-    batch_size = 0
+    batch_size = 1
     print("dataset file : " + str(all_keys))
     print("key name : " + str(all_keys))
     print("# of Mappers ", n_mapper)
-    
     
     if total_size % n_mapper == 0:
         batch_size = int(total_size/n_mapper)
@@ -61,7 +75,7 @@ def function_handler(request):
         batch_size = int(total_size/n_mapper) + 1
     
     for idx in range(n_mapper):
-        print("mapper-" + str(idx) + ":" + str(all_keys[idx*batch_size: (idx+1)*batch_size]))
+        print("mapper-" + str(idx) + ":" + str(all_keys[idx * batch_size: (idx+1) * batch_size]))
     
     # Invoke Mapper
     pool = ThreadPool(n_mapper)
@@ -69,3 +83,17 @@ def function_handler(request):
     pool.map(invoke_lambda_partial, range(n_mapper))
     pool.close()
     pool.join()
+
+    # Check Mapper Done
+    while True:
+        job_blobs = j_bucket.list_blobs()
+        done = sum(1 for _ in job_blobs)
+
+        time.sleep(10)
+        if done == total_size:
+            break
+
+    print("[*] Map Done - map : " + str(total_map) + " network : " + str(total_network))
+
+    # Reducer
+    reduce_invoke_lambda(job_bucket)

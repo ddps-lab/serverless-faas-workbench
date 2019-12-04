@@ -11,7 +11,7 @@ def flip(image, file_name):
     path_list.append(path)
 
     path = TMP + "flip-top-bottom-" + file_name
-    img = image.transpose(Image.FLIP_LEFT_RIGHT)
+    img = image.transpose(Image.FLIP_TOP_BOTTOM)
     img.save(path)
     path_list.append(path)
 

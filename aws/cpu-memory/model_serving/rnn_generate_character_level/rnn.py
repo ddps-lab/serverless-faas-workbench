@@ -49,7 +49,7 @@ class RNN(nn.Module):
 
     # Sample from a category and starting letter
     def sample(self, category, start_letter='A'):
-        category_tensor = Variable(self.gen_input_tensor(self.all_categories, self.n_categories, category))
+        category_tensor = Variable(self.gen_category_tensor(self.all_categories, self.n_categories, category))
         input_tensor = Variable(self.gen_input_tensor(self.all_letters, self.n_letters, start_letter))
         hidden = self.init_hidden()
 

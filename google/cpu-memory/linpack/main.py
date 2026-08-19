@@ -1,4 +1,4 @@
-from numpy import matrix, array, linalg, random, amax, asscalar
+from numpy import matrix, array, linalg, random, amax
 from time import time
 
 def linpack(N):

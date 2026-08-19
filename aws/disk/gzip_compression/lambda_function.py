@@ -12,7 +12,7 @@ def lambda_handler(event, context):
         f.write(os.urandom(file_size * 1024 * 1024))
     disk_latency = time() - start
 
-    with open(file_write_path) as f:
+    with open(file_write_path, 'rb') as f:
         start = time()
         with gzip.open('/tmp/result.gz', 'wb') as gz:
             gz.writelines(f)

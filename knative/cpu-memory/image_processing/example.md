@@ -1,0 +1,1 @@
+curl http://imageprocessing.knative-functions.10.144.8.1.sslip.io -X POST -H 'Content-Type: application/json' -d '{"object_key": "animal-dog.jpg", "input_bucket": "input", "output_bucket": "output", "endpoint_url": "http://minio.default:9000",  "aws_access_key_id": "andrei-access", "aws_secret_access_key": "andrei-secret"}'

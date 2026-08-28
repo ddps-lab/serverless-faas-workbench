@@ -1,0 +1,1 @@
+curl http://chameleon.knative-functions.10.144.8.1.sslip.io -X POST -H 'Content-Type: application/json' -d '{"num_of_rows": 100, "num_of_cols": 100}'

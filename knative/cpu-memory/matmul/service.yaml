@@ -1,0 +1,18 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: matmul
+  namespace: knative-functions
+spec:
+  template:
+    spec:
+      containers:
+      - name: matmul
+        image: docker.io/andersonandrei/functionbench-knative:matmul
+        resources:  
+          requests:
+            cpu: 1
+            memory: 1024M
+          limits:
+            cpu: 1
+            memory: 1024M 

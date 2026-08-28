@@ -1,0 +1,5 @@
+Flask
+gunicorn
+
+uuid
+boto3

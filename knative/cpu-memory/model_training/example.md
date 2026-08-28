@@ -1,0 +1,1 @@
+curl http://modeltraining.knative-functions.10.144.8.1.sslip.io -X POST -H 'Content-Type: application/json' -d '{"dataset_object_key": "reviews10mb.csv", "dataset_bucket": "input", "model_object_key": "lr_model.pk", "model_bucket": "input", "endpoint_url": "http://minio.default:9000",  "aws_access_key_id": "andrei-access", "aws_secret_access_key": "andrei-secret"}'

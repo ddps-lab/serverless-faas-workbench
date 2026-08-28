@@ -1,0 +1,18 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: pyaes
+  namespace: knative-functions
+spec:
+  template:
+    spec:
+      containers:
+      - name: pyaes
+        image: docker.io/andersonandrei/functionbench-knative:pyaes
+        resources:  
+          requests:
+            cpu: 1
+            memory: 1024M
+          limits:
+            cpu: 1
+            memory: 1024M 

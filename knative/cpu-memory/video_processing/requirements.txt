@@ -1,0 +1,5 @@
+Flask
+gunicorn
+
+opencv-python-headless
+boto3
